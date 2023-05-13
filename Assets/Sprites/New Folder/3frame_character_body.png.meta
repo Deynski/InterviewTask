@@ -678,14 +678,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      3frame_character_body_1: 2095724405837921888
       3frame_character_body_3: 5812203028350501791
-      3frame_character_body_11: -7219570631426118510
       3frame_character_body_10: 4336965165473942647
+      3frame_character_body_11: -7219570631426118510
       3frame_character_body_17: 4745579763691626134
-      3frame_character_body_16: -7908075892314864185
       3frame_character_body_18: -963391377576429967
+      3frame_character_body_16: -7908075892314864185
       3frame_character_body_4: 8601856384014542012
+      3frame_character_body_0: 1955445311070395896
       3frame_character_body_14: 3607486817665366878
       3frame_character_body_20: -6107644025132194875
       3frame_character_body_2: -6091693940602190714
@@ -701,7 +701,7 @@ TextureImporter:
       3frame_character_body_21: -5154250809342407583
       3frame_character_body_15: 2491837436991601378
       3frame_character_body_5: 6079658446594480526
-      3frame_character_body_0: 1955445311070395896
+      3frame_character_body_1: 2095724405837921888
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -10,15 +10,24 @@ public class ItemInteraction : CollidableObject
     
     protected override void OnCollided(GameObject collidedObject)
     {
-        PickableItem Item = collidedObject.GetComponent<PickableItem>();
-        if (Item != null)
+  
+        
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "MoneyBag")
         {
-            int reminder = m_InventoryData.AddItem(Item.InventoryItem, Item.Quantity);
-            if (reminder == 0)
-                Item.DestroyItem();            
-            else
-                Item.Quantity = reminder;
-            
+            PickableItem Item = collision.GetComponent<PickableItem>();
+            if (Item != null)
+            {
+                int reminder = m_InventoryData.AddItem(Item.InventoryItem, Item.Quantity);
+                if (reminder == 0)
+                    Item.DestroyItem();
+                else
+                    Item.Quantity = reminder;
+
+            }
         }
         
     }

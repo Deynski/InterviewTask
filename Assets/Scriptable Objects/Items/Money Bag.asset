@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3c8537c4aabc94b9ce8ef5ba413e70, type: 3}
+  m_Name: Money Bag
+  m_EditorClassIdentifier: 
+  <IsStackable>k__BackingField: 1
+  <MaxStackSize>k__BackingField: 99
+  <Price>k__BackingField: 0
+  <SellAmount>k__BackingField: 5
+  <Name>k__BackingField: Money Bag
+  <Description>k__BackingField: Use it to gain Money
+  <ItemImage>k__BackingField: {fileID: 21300000, guid: 59ed732e2fee5e2499599f91c89f3061, type: 3}
+  <Parameters>k__BackingField: []
+  m_ModifiersData:
+  - StatModifier: {fileID: 11400000, guid: 9c6490b04146d204283c84dba6e027a2, type: 2}
+    Value: 50
+  <ActionSFX>k__BackingField: {fileID: 8300000, guid: 24d73765699ce3e46bb23cabc3a46494, type: 3}

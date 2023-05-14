@@ -9,11 +9,12 @@ public class EdibleItemScriptable : ItemScriptable, IDestroyableItem, IItemActio
     [SerializeField]
     private List<ModifierData> m_ModifiersData = new List<ModifierData>();
 
-    public string ActionName => "Consume";
+    public string ActionName => "Use";
 
+    [field: SerializeField]
     public AudioClip ActionSFX { get; private set; }
 
-    public bool PerformAction(GameObject i_Character)
+    public bool PerformAction(GameObject i_Character , List<ItemParameterStruct> i_ItemState = null)
     {
         foreach (ModifierData data in m_ModifiersData)
         {
@@ -33,7 +34,7 @@ public interface IItemAction
 {
     public string ActionName { get; }
     public AudioClip ActionSFX { get; }
-    bool PerformAction(GameObject character);
+    bool PerformAction(GameObject character, List<ItemParameterStruct> itemState);
 }
 
 [Serializable]

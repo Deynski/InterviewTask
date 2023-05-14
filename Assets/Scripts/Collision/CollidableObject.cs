@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class CollidableObject : MonoBehaviour
 {
@@ -25,8 +24,36 @@ public class CollidableObject : MonoBehaviour
     }
     protected virtual void OnCollided (GameObject collidedObject)
     {
-        Debug.Log("Collided With" + collidedObject.name);
+        
     }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+
+    }
+
+    protected virtual void OnTriggerStay2D(Collider2D collision)
+    {
+        
+    }
+
+    protected virtual void OnTriggerExit2D(Collider2D collision)
+    {
+        
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+
+    }
+
+    protected virtual void OnCollisionExit2D(Collision2D collision)
+    {
+
+    }
+
+
 
 
 }

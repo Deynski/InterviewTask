@@ -24,7 +24,7 @@ public class InventoryScriptable : ScriptableObject
         }
     }
 
-    public int AddItem(ItemScriptable i_Item, int i_Quantity)
+    public int AddItem(ItemScriptable i_Item, int i_Quantity, List<ItemParameterStruct> i_ItemState = null)
     {
         if (i_Item.IsStackable == false)
         {
@@ -33,7 +33,7 @@ public class InventoryScriptable : ScriptableObject
              
                 while (i_Quantity > 0 && IsInventoryFull() == false)
                 {
-                    i_Quantity -= AddItemToFirstFreeSlot(i_Item, 1);
+                    i_Quantity -= AddItemToFirstFreeSlot(i_Item, 1 , i_ItemState);
                     
                 }
                 InformAboutChange();
@@ -46,12 +46,13 @@ public class InventoryScriptable : ScriptableObject
         return i_Quantity;
     }
 
-    private int AddItemToFirstFreeSlot(ItemScriptable i_Item, int i_Quantity)
+    private int AddItemToFirstFreeSlot(ItemScriptable i_Item, int i_Quantity, List<ItemParameterStruct> i_ItemState = null)
     {
         InventoryItemStruct newItem = new InventoryItemStruct
         {
             Item = i_Item,
-            Quantity = i_Quantity
+            Quantity = i_Quantity,
+            ItemStates = new List<ItemParameterStruct>(i_ItemState == null ? i_Item.Parameters : i_ItemState)
         };
 
         for (int i = 0; i < m_InventoryItems.Count; i++)
@@ -130,12 +131,22 @@ public class InventoryScriptable : ScriptableObject
 
     public void SwapItems(int i_ItemIndex1, int i_ItemIndex2)
     {
-        InventoryItemStruct item1 = m_InventoryItems[i_ItemIndex1];
+        try
+        {
+            InventoryItemStruct item1 = m_InventoryItems[i_ItemIndex1];
 
-        m_InventoryItems[i_ItemIndex1] = m_InventoryItems[i_ItemIndex2];
-        m_InventoryItems[i_ItemIndex2] = item1;
+            m_InventoryItems[i_ItemIndex1] = m_InventoryItems[i_ItemIndex2];
+            m_InventoryItems[i_ItemIndex2] = item1;
 
-        InformAboutChange();
+            InformAboutChange();
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+
+            throw;
+            Debug.Log("Exception");
+        }
+       
     }
 
     private void InformAboutChange()
@@ -166,6 +177,7 @@ public struct InventoryItemStruct
 {
     public int Quantity;
     public ItemScriptable Item;
+    public List<ItemParameterStruct> ItemStates;
 
     public bool IsEmpty => Item == null;
 
@@ -174,13 +186,15 @@ public struct InventoryItemStruct
         return new InventoryItemStruct
         {
             Item = this.Item,
-            Quantity = quantity
+            Quantity = quantity,
+            ItemStates = new List<ItemParameterStruct>(this.ItemStates)
         };
     }
 
     public static InventoryItemStruct GetEmptyItem() => new InventoryItemStruct
     {
         Item = null,
-        Quantity = 0
+        Quantity = 0,
+        ItemStates = new List<ItemParameterStruct>()
     };
 }

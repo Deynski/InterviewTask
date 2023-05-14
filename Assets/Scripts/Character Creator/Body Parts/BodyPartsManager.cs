@@ -8,12 +8,12 @@ public class BodyPartsManager : MonoBehaviour
 {
     // ~~ 1. Updates All Animations to Match Player Selections
 
-    [SerializeField] private SO_CharacterBody characterBody;
+    [SerializeField] public SO_CharacterBody characterBody;
 
     // String Arrays
-    [SerializeField] private string[] bodyPartTypes;
-    [SerializeField] private string[] characterStates;
-    [SerializeField] private string[] characterDirections;
+    [SerializeField] public string[] bodyPartTypes;
+    [SerializeField] public string[] characterStates;
+    [SerializeField] public string[] characterDirections;
     
     // Animation
     private Animator animator;

@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - SellingArea
+  - ShopKeeper
+  - MoneyBag
   layers:
   - Default
   - TransparentFX
@@ -41,6 +44,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: TreeBottm
+    uniqueID: 2594980829
+    locked: 0
+  - name: Decorations
+    uniqueID: 3116903487
+    locked: 0
   - name: Player
     uniqueID: 760617767
+    locked: 0
+  - name: TreeTop
+    uniqueID: 181545639
+    locked: 0
+  - name: Structures
+    uniqueID: 1078125113
     locked: 0

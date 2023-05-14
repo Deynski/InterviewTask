@@ -1,6 +1,8 @@
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class InventoryPage : MonoBehaviour
@@ -14,6 +16,8 @@ public class InventoryPage : MonoBehaviour
     [SerializeField] 
     private MouseFollower m_MouseFollower;
 
+    [SerializeField] private ItemActionPanel m_ActionPanel;
+
     [SerializeField]
     private RectTransform m_ContentPanel;
 
@@ -23,6 +27,9 @@ public class InventoryPage : MonoBehaviour
 
     public event Action<int> OnDescriptionRequested,OnItemActionRequested,OnStartDragging;
     public event Action<int, int> OnSwapItems;
+
+    [SerializeField]
+    private ItemActionPanel actionPanel;
 
 
     private void Awake()
@@ -124,14 +131,21 @@ public class InventoryPage : MonoBehaviour
 
     public void Hide()
     {
+        actionPanel.Toggle(false);
         gameObject.SetActive(false);
         ResetDraggedItem();
+        
     }
 
-    private void ResetSelection()
+    public void ResetSelection()
     {
         m_ItemDescription.ResetDescription();
         DeselectAllItems();
+    }
+
+    public void AddAction(string actionName, Action performAction)
+    {
+        actionPanel.AddButton(actionName, performAction);
     }
 
     private void DeselectAllItems()
@@ -140,6 +154,13 @@ public class InventoryPage : MonoBehaviour
         {
             item.Deselect();
         }
+        m_ActionPanel.Toggle(false);
+    }
+
+    public void ShowItemAction(int i_ItemIndex)
+    {
+        m_ActionPanel.Toggle(true);
+        m_ActionPanel.transform.position = listOfItems[i_ItemIndex].transform.position;
     }
 
     internal void UpdateDescription(int i_ItemIndex, Sprite i_ItemImage, string i_Name, string i_Description)
@@ -157,4 +178,6 @@ public class InventoryPage : MonoBehaviour
             item.Deselect();
         }
     }
+
+    public ItemActionPanel ItemActionPanel { get => m_ActionPanel; }
 }

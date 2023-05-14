@@ -4,25 +4,43 @@ using UnityEngine;
 
 public class NPCInteraction : CollidableObject
 {
-    private bool m_Interacted = false;
-    protected override void OnCollided(GameObject collidedObject)
+
+    private const string DEFAULT_MESSAGE = "Town's Shop";
+    private const string UPDATED_MESSAGE = "Press F to Interact";
+
+    protected override void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKey(KeyCode.F))
+        if (collision.tag == "ShopKeeper")
         {
-            OnInteract();
+            GameManager.TextManager.UpdateShopSign(UPDATED_MESSAGE);
+            if (Input.GetKey(KeyCode.F))
+            {
+                if (GameManager.InventoryController.InventoryPage.isActiveAndEnabled == false)
+                {
+                    OnOpenShop(collision.gameObject);
+                }
+            }
         }
     }
 
-    private void OnInteract()
+    protected override void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "ShopKeeper")
+            GameManager.TextManager.UpdateShopSign(DEFAULT_MESSAGE);
+    }
 
-        if(!m_Interacted)
+    private void OnOpenShop(GameObject collidedObject)
+    {
+        VendorNPC npc = collidedObject.GetComponentInParent<VendorNPC>();
+        if (npc != null)
         {
-            m_Interacted = true;
-            Debug.Log("Interacted with: " + name);
+            npc.OpenShop();
+            GameManager.Instance.PlayerStopMoving = true;
+            if (GameManager.InventoryController.InventoryPage.isActiveAndEnabled == true) 
+            {
+                GameManager.InventoryController.InventoryPage.Hide();
+            }
         }
-        
-       
     }
 
 

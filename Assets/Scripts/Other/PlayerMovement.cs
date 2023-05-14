@@ -30,21 +30,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimationAndMove()
     {
-        if (playerMovement != Vector3.zero)
+        if (GameManager.Instance.PlayerStopMoving == false)
         {
-            MoveCharacter();
-            animator.SetFloat("moveX", playerMovement.x);
-            animator.SetFloat("moveY", playerMovement.y);
-            animator.SetBool("moving", true);
+            if (playerMovement != Vector3.zero)
+            {
+                MoveCharacter();
+                animator.SetFloat("moveX", playerMovement.x);
+                animator.SetFloat("moveY", playerMovement.y);
+                animator.SetBool("moving", true);
+            }
+            else
+            {
+                animator.SetBool("moving", false);
+            }
         }
-        else
-        {
-            animator.SetBool("moving", false);
-        }
+       
     }
 
     private void MoveCharacter()
     {
         myRigidbody.MovePosition(transform.position + playerMovement * speed * Time.deltaTime);
+        
+       
     }
 }
